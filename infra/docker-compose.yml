@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+  db_bos_unicall:
+    container_name: db_bos_unicall
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: testdb
