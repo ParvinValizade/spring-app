@@ -1,14 +1,11 @@
 package paputu.company.az.dto.response;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserResponse {
 
     private String firstName;
