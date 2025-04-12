@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import paputu.company.az.dto.request.CreateProductRequest;
 import paputu.company.az.dto.response.ProductResponse;
-import paputu.company.az.repository.ProductRepository;
 import paputu.company.az.service.ProductService;
 
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    private final ProductRepository productRepository;
 
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductRequest productRequest) {
