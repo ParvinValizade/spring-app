@@ -23,8 +23,8 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
-    @ExceptionHandler({UserNotFoundException.class})
-    public CommonErrorResponse handleUserNotFoundException(UserNotFoundException ex) {
+    @ExceptionHandler({NotFoundException.class})
+    public CommonErrorResponse handleUserNotFoundException(NotFoundException ex) {
         log.error("User Not Found  {}", ex.getMessage(), ex);
         return CommonErrorResponse.builder()
                 .requestId(UUID.randomUUID().toString())

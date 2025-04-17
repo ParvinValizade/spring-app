@@ -51,7 +51,6 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProductByHashCode(String productHashCode) {
         productRepository.findProductByProductHashCode(productHashCode)
                 .ifPresent(productRepository::delete);
-
     }
 
     @Override
