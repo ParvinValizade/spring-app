@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 public class CommonErrorCode {
 
     public static final String ALREADY_EXIST = "already_exist";
+    public static final String USER_NOT_FOUND = "user_not_found";
 }

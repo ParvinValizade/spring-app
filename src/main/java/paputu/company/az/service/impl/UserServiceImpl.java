@@ -7,6 +7,7 @@ import paputu.company.az.dto.request.CreateUserRequest;
 import paputu.company.az.dto.request.UpdateUserRequest;
 import paputu.company.az.dto.response.UserResponse;
 import paputu.company.az.exception.AlreadyUserExistsException;
+import paputu.company.az.exception.UserNotFoundException;
 import paputu.company.az.mapper.UpdateUserMapper;
 import paputu.company.az.mapper.UserMapper;
 import paputu.company.az.mapper.UserRequestMapper;
@@ -29,8 +30,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse createUser(CreateUserRequest userRequest) {
         userRepository.findByEmail(userRequest.getEmail())
-                .ifPresent(user->
-                {throw new AlreadyUserExistsException("User already exists with email " + userRequest.getEmail());});
+                .ifPresent(user->{
+                    throw new AlreadyUserExistsException("User already exists with email " + userRequest.getEmail());
+                });
 
         User savedUser = userRepository.save(userRequestMapper.toEntity(userRequest));
 
@@ -41,8 +43,10 @@ public class UserServiceImpl implements UserService {
     public UserResponse getUserByEmail(String email) {
 
         //TODO NotFoundException
-        User user = userRepository.findByEmail(email).orElseThrow(()->
-                 new RuntimeException("can't find user by this email: " + email));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow( () ->
+                new UserNotFoundException("User not found with email " + email)
+                );
 
         return userMapper.toDto(user);
     }
@@ -62,9 +66,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponse updateUser(Long userId, UpdateUserRequest request) {
-        //TODO NotFoundException
+
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new RuntimeException("can't find user by this id: " + userId));
+                .orElseThrow( () ->
+                    new UserNotFoundException("User not found with ID " + userId)
+                );
 
         updateUserMapper.updateUserFromRequest(request, user);
 
