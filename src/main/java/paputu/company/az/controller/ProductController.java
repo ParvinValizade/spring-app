@@ -1,9 +1,11 @@
 package paputu.company.az.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import paputu.company.az.dto.request.CreateProductRequest;
+import paputu.company.az.dto.request.UpdateProductRequest;
 import paputu.company.az.dto.response.ProductResponse;
 import paputu.company.az.service.ProductService;
 
@@ -19,6 +21,12 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductRequest productRequest) {
         return ResponseEntity.ok(productService.createProduct(productRequest));
+    }
+
+    @PatchMapping("/{productHashCode}")
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable String productHashCode,
+                                                         @RequestBody UpdateProductRequest request){
+        return new ResponseEntity<>(productService.updateProduct(productHashCode,request), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/by")
