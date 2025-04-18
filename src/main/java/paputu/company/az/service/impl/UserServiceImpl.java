@@ -1,7 +1,6 @@
 package paputu.company.az.service.impl;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
